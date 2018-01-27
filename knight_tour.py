@@ -37,7 +37,7 @@ def is_safe(x, y, solution):
     # check if x and y are in the board range,
     # then check if their value is -1
     # what does -1 mean in given context?
-    return (x >= 0 and x < n and y >= 0 and y < n and solution[x][y] == -1)
+    return (0 <= x < n and 0 <= y < n and solution[x][y] == -1)
 
 
 def print_solution(solution):
