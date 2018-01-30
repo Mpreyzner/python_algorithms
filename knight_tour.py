@@ -36,14 +36,15 @@ n = 8
 def is_safe(x, y, solution):
     # check if x and y are in the board range,
     # then check if their value is -1
-    # what does -1 mean in given context?
-    return (0 <= x < n and 0 <= y < n and solution[x][y] == -1)
+    # -1 means that given field was not visited yet (or it was backtracked)
+    return 0 <= x < n and 0 <= y < n and solution[x][y] == -1
 
 
 def print_solution(solution):
     for x in range(n - 1):
         for y in range(n - 1):
             print(str(solution[x][y]) + " ")
+        print("\n")
 
 
 def solve_tour():
@@ -57,7 +58,6 @@ def solve_tour():
     # Since the Knight is initially at the first block
     solution[0][0] = 0
     # Start from 0,0 and explore all tours using
-    # solveKTUtil()
     if not solve_util(0, 0, 1, solution, xMove, yMove):
         print("Solution does not exist")
         return False
@@ -74,7 +74,7 @@ def solve_util(x, y, moveCounter, solution, xMove, yMove):
     for k in range(8):
         next_x = x + xMove[k]
         next_y = y + yMove[k]
-
+        # if the move is not safe try other possible moves
         if is_safe(next_x, next_y, solution):
             solution[x][y] = moveCounter
             if solve_util(next_x, next_y, moveCounter + 1, solution, xMove, yMove):

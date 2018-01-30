@@ -33,54 +33,53 @@ def print_solution(board):
 # So we need to check only left side for
 # attacking queens
 def is_safe(board, row, col):
-
     # Check this row on left side
     for i in range(col):
         if board[row][i] == 1:
             return False
 
     # Check upper diagonal on left side
-    for i,j in zip(range(row,-1,-1), range(col,-1,-1)):
+    for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
         if board[i][j] == 1:
             return False
 
     # Check lower diagonal on left side
-    for i,j in zip(range(row, n, 1), range(col, -1, -1)):
+    for i, j in zip(range(row, n, 1), range(col, -1, -1)):
         if board[i][j] == 1:
             return False
 
     return True
 
 
-def solve_util(board, col):
+def solve_util(board, column):
     # base case: If all queens are placed
     # then return true
-    if col >= n:
+    if column >= n:
         return True
 
     # Consider this column and try placing
     # this queen in all rows one by one
     for i in range(n):
-        if is_safe(board, i, col):
+        if is_safe(board, i, column):
             # Place this queen in board[i][col]
-            board[i][col] = 1
+            board[i][column] = 1
 
             # recur to place rest of the queens
-            if solve_util(board, col + 1):
+            if solve_util(board, column + 1):
                 return True
 
             # backtrack
-            board[i][col] = 0
+            board[i][column] = 0
 
     # if queen can not be place in any row in
     return False
 
 
 def solve_n_queens():
-    board = [ [0, 0, 0, 0],
-              [0, 0, 0, 0],
-              [0, 0, 0, 0],
-              [0, 0, 0, 0]
+    board = [[0, 0, 0, 0],
+             [0, 0, 0, 0],
+             [0, 0, 0, 0],
+             [0, 0, 0, 0]
              ]
 
     if solve_util(board, 0):
@@ -89,8 +88,6 @@ def solve_n_queens():
 
     print("Solution does not exist")
     return False
-
-
 
 
 solve_n_queens()

@@ -32,7 +32,7 @@ def print_solution(solution):
 
 
 def is_safe(x, y, maze):
-    # // if (x,y outside maze) return false
+    # if (x,y outside maze) return false
     return x >= 0 and x < n and y >= 0 and y < n and maze[x][y] == 1
 
 
